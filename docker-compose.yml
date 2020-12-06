@@ -7,7 +7,7 @@ services:
     container_name: 'mend-webserver'
     restart: 'always'
     ports:
-      - "80:80"
+      - "8081:80"
       - "443:443"
     links:
       - mysql
