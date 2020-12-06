@@ -1,3 +1,6 @@
+<?php
+  $serve = $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'];
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,8 +35,7 @@
                                 <li>
                                     <?php
                                     $link = mysqli_connect("mysql", "root", "tiger", null);
-
-/* check connection */
+                                    /* check connection */
                                     if (mysqli_connect_errno()) {
                                         printf("MySQL connecttion failed: %s", mysqli_connect_error());
                                     } else {
@@ -52,8 +54,8 @@
                         <hr>
                         <div class="content">
                             <ul>
-                                <li><a href="http://localhost/phpinfo.php">phpinfo()</a></li>
-                                <li><a href="http://localhost/test_db.php">Test DB Connection</a></li>
+                                <li><a href="//<?php echo $serve; ?>/phpinfo.php">phpinfo()</a></li>
+                                <li><a href="//<?php echo $serve; ?>/test_db.php">Test DB Connection</a></li>
                             </ul>
                         </div>
                     </div>
