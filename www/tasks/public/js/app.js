@@ -1984,6 +1984,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     id: Number,
@@ -2146,7 +2148,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _this4.updateTask(value, newTask);
+                _this4.flashMessage.error({
+                  title: 'Updating Tasks Not Ready Yet'
+                }); //this.updateTask(value, newTask);
+
 
               case 1:
               case "end":
@@ -2254,10 +2259,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 _yield$axios$put = _context7.sent;
                 data = _yield$axios$put.data;
-                index = _this7.tasks.find(function (task) {
+                index = _this7.tasks.findIndex(function (task) {
                   return task.id === id;
                 });
-                _this7.tasks[index] = _this7.newTask;
+                Object.assign(_this7.tasks[index], data);
                 _context7.next = 13;
                 break;
 
@@ -38718,43 +38723,6 @@ var render = function() {
                     "fill-rule": "evenodd",
                     d:
                       "M1.5 13A1.5 1.5 0 0 0 3 14.5h10a1.5 1.5 0 0 0 1.5-1.5V8a.5.5 0 0 0-1 0v5a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5h8a.5.5 0 0 0 0-1H3A1.5 1.5 0 0 0 1.5 3v10z"
-                  }
-                })
-              ]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                return _vm.$emit("update", _vm.id)
-              }
-            }
-          },
-          [
-            _c(
-              "svg",
-              {
-                staticClass: "bi bi-pencil",
-                attrs: {
-                  width: "1em",
-                  height: "1em",
-                  viewBox: "0 0 16 16",
-                  fill: "currentColor",
-                  xmlns: "http://www.w3.org/2000/svg"
-                }
-              },
-              [
-                _c("path", {
-                  attrs: {
-                    "fill-rule": "evenodd",
-                    d:
-                      "M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"
                   }
                 })
               ]

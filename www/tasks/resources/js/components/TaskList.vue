@@ -73,14 +73,15 @@
                 this.updateTask(value, { is_done: true });
             },
             async handleUpdateTask(value) {
-                this.updateTask(value, newTask);
+                this.flashMessage.error({title: 'Updating Tasks Not Ready Yet'});
+                //this.updateTask(value, newTask);
             },
             async readTasks() {
                 try {
                     const { data } = await axios.get(window.taskApiUrl);
                     this.tasks = data;
                 } catch (e) {
-                    const message = e.response.data.errors || e.message
+                    const message = e.response.data.errors || e.message;
                     this.flashMessage.error({title: 'Error Loading Tasks', message});
                 }
             },
@@ -90,17 +91,17 @@
                     this.newTask = this.cleanTask();
                     this.tasks.push(data);
                 } catch (e) {
-                    const message = e.response.data.errors || e.message
+                    const message = e.response.data.errors || e.message;
                     this.flashMessage.error({title: 'Error Creating Tasks', message});
                 }
             },
             async updateTask(id, newTask) {
                 try {
                     const { data } = await axios.put(`${window.taskApiUrl}/${id}`, newTask);
-                    let index = this.tasks.find(task => task.id === id)
-                    this.tasks[index] = this.newTask;
+                    let index = this.tasks.findIndex(task => task.id === id);
+                    Object.assign(this.tasks[index], data);
                 } catch (e) {
-                    const message = e.response.data.errors || e.message
+                    const message = e.response.data.errors || e.message;
                     this.flashMessage.error({title: 'Error Updating Task', message});
                 }
             },
@@ -110,7 +111,7 @@
                     let index = this.tasks.findIndex(task => task.id === id);
                     this.tasks.splice(index, 1);
                 } catch (e) {
-                    const message = e.response.data.errors || e.message
+                    const message = e.response.data.errors || e.message;
                     this.flashMessage.error({title: 'Error Deleting Task', message});
                 }
             },
