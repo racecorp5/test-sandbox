@@ -10,18 +10,6 @@ use Carbon\Carbon;
 class TaskController extends Controller
 {
     /**
-     * The validation for creating/editing a task
-     *
-     * @var array
-     * @TDOD move to request filter
-     */
-    private $request_validation = [
-        'title' => 'required|unique:tasks|max:255',
-        'due_date' => 'date',
-        'is_done' => 'required',
-    ];
-    
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -54,7 +42,11 @@ class TaskController extends Controller
         //$request['due_date'] = Carbon::createFromFormat('Y-m-d H:i:s e+', $request['due_date'])->format('Y-m-d');
         $request['due_date'] = Carbon::parse($request['due_date'])->toDateTimeString();
 
-        $request->validate($this->request_validation);
+        $request->validate([
+            'title' => 'required|unique:tasks|max:255',
+            'due_date' => 'date',
+            'is_done' => 'required|bool',
+        ]);
   
         $task = Task::create($request->all());
    
@@ -95,7 +87,11 @@ class TaskController extends Controller
         $request['due_date'] = Carbon::parse($request['due_date'])->toDateTimeString();
         //$request['due_date'] = Carbon::createFromFormat('Y-m-d H:i:s e+', $request['due_date'])->format('Y-m-d');
 
-        $request->validate($this->request_validation);
+        $request->validate([[
+            'title' => 'unique:tasks|max:255',
+            'due_date' => 'date',
+            'is_done' => 'bool',
+        ]]);
 
         $task->update($request->all());
         $task->save();
