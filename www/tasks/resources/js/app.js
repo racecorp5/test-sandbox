@@ -5,8 +5,10 @@
  */
 
 require('./bootstrap');
+import FlashMessage from '@smartweb/vue-flash-message';
 
 window.Vue = require('vue');
+window.taskApiUrl = '/api/v1/tasks';
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,7 +21,11 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.use(FlashMessage, { time: 3000 });
+
+Vue.component('tasklist', require('./components/TaskList.vue').default);
+Vue.component('task', require('./components/Task.vue').default);
+Vue.component('datepicker', require('vuejs-datepicker').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
