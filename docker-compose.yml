@@ -7,7 +7,7 @@ services:
     container_name: 'mend-webserver'
     restart: 'always'
     ports:
-      - "8081:80"
+      - "80:80"
       - "443:443"
     links:
       - mysql
@@ -31,3 +31,11 @@ services:
       MYSQL_USER: png
       MYSQL_PASSWORD: png
 
+  npm:
+    image: node:13.7
+    container_name: npm
+    volumes:
+      - ./www/tasks:/var/www/html/tasks
+    working_dir: /var/www/html/tasks
+    entrypoint: ['npm']
+    
